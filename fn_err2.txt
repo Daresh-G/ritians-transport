@@ -1,0 +1,40 @@
+
+[36m[1mi  
+functions:[22m[39m 
+ensuring required API [1mc
+loudfunctions.googleapis.co
+m[22m is enabled...
+[36m[1mi  
+functions:[22m[39m 
+ensuring required API [1mc
+loudbuild.googleapis.com[2
+2m is enabled...
+[36m[1mi  artifactregistr
+y:[22m[39m ensuring 
+required API [1martifactre
+gistry.googleapis.com[22m 
+is enabled...
+[33m[1m!  
+functions:[22m[39m 
+missing required API [1mcl
+oudbuild.googleapis.com[22
+m. Enabling now...
+[33m[1m!  artifactregistr
+y:[22m[39m missing 
+required API [1martifactre
+gistry.googleapis.com[22m.
+ Enabling now...
+[1m[31mError:[39m[22m 
+Your project 
+[1mritians-transport[22m 
+must be on the Blaze 
+(pay-as-you-go) plan to 
+complete this command. 
+Required API [1mcloudbuild
+.googleapis.com[22m can't 
+be enabled until the 
+upgrade is complete. To 
+upgrade, visit the 
+following URL:
+
+

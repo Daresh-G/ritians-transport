@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ritians Transport</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <div class="logo-wrapper">
+                <div class="logo-glow"></div>
+                <div class="logo-circle">
+                    <i class="fas fa-bus"></i>
+                </div>
+            </div>
+            <div class="brand">
+                <h1>Ritians Transport</h1>
+                <p>Daily Route Schedule, Admin & Driver Portal</p>
+            </div>
+            <div class="nav-pills">
+                <button class="pill active" id="pillStudent">Student</button>
+                <button class="pill" id="pillAdmin">Admin</button>
+                <button class="pill" id="pillDriver">Driver</button>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="time-pill">
+                <div class="date-section">
+                    <span id="currentDate_Weekday">Tuesday,</span>
+                    <span id="currentDate_Full">17 Feb 2026</span>
+                </div>
+                <div class="time-section">
+                    <span id="currentTime_HHMMSS">09:18:28</span>
+                    <span id="currentTime_AMPM">pm</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Intro Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-intro">
+                <h2 class="hero-title">Daily Bus Routes</h2>
+                <p class="hero-subtitle">
+                    View all transport routes, timings, and live parking updates from drivers.
+                </p>
+                <div class="hero-actions">
+                    <div class="search-box hero-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput"
+                            placeholder="Find routes, areas, or timing (e.g., 6.10 am)..." />
+                    </div>
+                </div>
+                <div class="badge-row">
+                    <span class="status-badge">
+                        <i class="fas fa-route"></i> <span id="statRoutesBadge">51</span> ROUTES
+                    </span>
+                    <span class="status-badge">
+                        <i class="fas fa-clock"></i> LIVE UPDATES
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-inner">
+                        <span class="stat-label">TOTAL ROUTES</span>
+                        <span id="statTotalRoutes" class="stat-value">52</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-inner">
+                        <span class="stat-label">EARLIEST</span>
+                        <span id="statEarliest" class="stat-value">5.25 am</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-inner">
+                        <span class="stat-label">LATEST</span>
+                        <span id="statLatest" class="stat-value">7.05 am</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-inner">
+                        <span class="stat-label">ACTIVE PARKING</span>
+                        <span id="statActiveParking" class="stat-value">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STUDENT VIEW ================= -->
+    <main id="studentSection" class="section-visible">
+        <!-- Week view: date + 1-week day strip -->
+        <section class="week-view-strip">
+            <h2 class="week-view-title">Available Buses for <span id="selectedDateLabel">Friday, 24 Jan 2026</span></h2>
+            <div class="week-days" id="weekDays" role="tablist">
+                <!-- Filled by JS: FRI 24, SAT 25, ... -->
+            </div>
+        </section>
+        <div class="layout">
+            <!-- Left: Controls + Table -->
+            <section class="panel panel-main">
+                <div class="panel-header">
+                    <div>
+                        <h3>All Bus Routes</h3>
+                        <p>Search and explore today’s scheduled college routes.</p>
+                    </div>
+
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="routes-table">
+                        <thead>
+                            <tr>
+                                <th width="40">#</th>
+                                <th>ROUTE</th>
+                                <th>NAME</th>
+                                <th>BOARDING</th>
+                                <th>START</th>
+                                <th>PARKING</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routesTableBody">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                    <div id="noResults" class="no-results hidden">
+                        <i class="fas fa-search"></i>
+                        <p>No routes match your search. Try different keywords.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right: Highlights / Quick View -->
+            <aside class="panel panel-side">
+                <div class="panel-header compact">
+                    <div>
+                        <h3>Highlights</h3>
+                        <p>Quick view of key routes and clusters.</p>
+                    </div>
+                </div>
+
+                <div id="highlightCards" class="highlight-grid">
+                    <!-- Filled by JavaScript -->
+                </div>
+
+                <div class="legend">
+                    <h4>Timing Legend</h4>
+                    <ul>
+                        <li><span class="dot early"></span> Before 6:00 am — Early departure</li>
+                        <li><span class="dot normal"></span> 6:00 – 6:30 am — Regular</li>
+                        <li><span class="dot late"></span> After 6:30 am — Late start</li>
+                    </ul>
+                </div>
+
+                <div class="legend">
+                    <h4>Parking Legend</h4>
+                    <ul>
+                        <li><i class="fas fa-circle text-green"></i> Parking updated by driver</li>
+                        <li><i class="fas fa-circle text-muted"></i> Parking not yet updated</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- ================= ADMIN VIEW ================= -->
+    <section id="adminSection" class="section-hidden">
+        <!-- Admin header -->
+        <section class="panel panel-main admin-header-panel">
+            <div class="panel-header">
+                <div>
+                    <h3>Admin Control Center</h3>
+                    <p>Secure area to maintain bus routes and timings.</p>
+                </div>
+                <div class="admin-header-actions">
+                    <div class="admin-status" id="adminStatusText">
+                        Admin access: locked
+                    </div>
+                    <button class="btn-ghost" id="adminResetBtn"
+                        style="color: #dc3545; border-color: #dc3545; margin-right: 10px;">
+                        <i class="fas fa-rotate-left"></i> Reset Bus Data
+                    </button>
+                    <button class="btn-ghost" id="adminClearParkingBtn"
+                        style="color: #fca5a5; border-color: #fca5a5; margin-right: 10px;">
+                        <i class="fas fa-trash-can"></i> Clear Live Parking
+                    </button>
+                    <button class="btn-logout" id="adminLogoutBtn" style="display: none;">
+                        <i class="fas fa-power-off"></i> Logout
+                    </button>
+                    <button class="btn-ghost" id="backToStudentFromAdmin" onclick="switchView('Student')">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin layout: form + summary -->
+        <div class="admin-layout" id="adminContent">
+            <!-- Form panel -->
+            <section class="panel admin-form-panel">
+                <div class="panel-header compact">
+                    <div>
+                        <h3 id="adminFormTitle">Add New Route</h3>
+                        <p>Fill the details below and save to update the master list.</p>
+                    </div>
+                </div>
+
+                <form id="adminRouteForm" class="admin-form">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="adminRouteNo">Route No *</label>
+                            <input type="text" id="adminRouteNo" placeholder="e.g., R01, R16A" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="adminRouteName">Route Name *</label>
+                            <input type="text" id="adminRouteName" placeholder="e.g., Ennore, Velachery" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="adminTiming">Timing Label *</label>
+                            <input type="text" id="adminTiming" placeholder="e.g., Boarding Points"
+                                value="Boarding Points" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="adminStartTime">Starting Time *</label>
+                            <input type="text" id="adminStartTime" placeholder="e.g., 6.10 am" required />
+                            <p class="field-hint">
+                                Use format like <strong>6.10 am</strong>, <strong>5.50 am</strong>.
+                            </p>
+                        </div>
+                        <div class="form-field full-width" style="grid-column: span 2; margin-top: 15px;">
+                            <label for="adminStops">Stopping Points (formatted JSON)</label>
+                            <textarea id="adminStops" placeholder='[{"stop": "Point A", "time": "6.00 am"}]'
+                                style="width: 100%; min-height: 100px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; padding: 10px; border-radius: 8px; font-family: monospace;"></textarea>
+                            <p class="field-hint">Example: [{"stop": "Lift Gate", "time": "5.50 am"}]</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="button" class="btn-ghost" id="adminClearBtn">
+                            <i class="fas fa-rotate-left"></i> Clear
+                        </button>
+                        <button type="submit" class="btn-primary" id="adminSaveBtn">
+                            <i class="fas fa-floppy-disk"></i>
+                            <span id="adminSaveLabel">Save Route</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Summary / helper panel -->
+            <section class="panel admin-summary-panel">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-label">Total Routes</div>
+                        <div class="summary-value" id="adminTotalRoutes">0</div>
+                        <div class="summary-note">Live count from schedule</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Earliest Departure</div>
+                        <div class="summary-value" id="adminEarliestRoute">–</div>
+                        <div class="summary-note">First bus start time</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Latest Departure</div>
+                        <div class="summary-value" id="adminLatestRoute">–</div>
+                        <div class="summary-note">Last bus start time</div>
+                    </div>
+                </div>
+
+                <div class="admin-help">
+                    <h4>Admin notes</h4>
+                    <ul>
+                        <li>Editing a route instantly updates the student dashboard.</li>
+                        <li>Use clear, consistent route names so students can find them easily.</li>
+                        <li>Keep the time format consistent (e.g., <strong>6.10 am</strong>).</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Admin table panel -->
+        <section class="panel admin-table-panel" id="adminTableContainer">
+            <div class="panel-header">
+                <div>
+                    <h3>Manage Routes</h3>
+                    <p>Edit or remove existing routes. Changes are immediate.</p>
+                </div>
+                <div class="admin-legend">
+                    <span class="admin-badge admin-badge-edit">
+                        <i class="fas fa-pen"></i> Edit
+                    </span>
+                    <span class="admin-badge admin-badge-delete">
+                        <i class="fas fa-trash"></i> Delete
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-wrapper admin-table-wrapper">
+                <table class="routes-table admin-routes-table">
+                    <thead>
+                        <tr>
+                            <th width="40">#</th>
+                            <th>ROUTE</th>
+                            <th>NAME</th>
+                            <th>TIMING</th>
+                            <th>START</th>
+                            <th>STATUS</th>
+                            <th style="text-align: right;">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminRoutesTableBody">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+
+    <!-- ================= DRIVER VIEW ================= -->
+    <section id="driverSection" class="section-hidden">
+        <section class="panel panel-main driver-header-panel">
+            <div class="panel-header">
+                <div>
+                    <h3>Driver Parking Portal</h3>
+                    <p>
+                        For drivers to publish <strong>exact parking location</strong>
+                        inside campus after they park the bus.
+                    </p>
+                </div>
+                <div class="driver-header-actions">
+                    <div class="driver-status" id="driverStatusText">
+                        Driver access: locked
+                    </div>
+                    <button class="btn-logout" id="driverLogoutBtn" style="display: none;">
+                        <i class="fas fa-power-off"></i> Logout
+                    </button>
+                    <button class="btn-ghost" id="backToStudentFromDriver" onclick="switchView('Student')">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="driver-layout" id="driverContent">
+            <!-- Left: Driver form -->
+            <section class="panel driver-form-panel">
+                <div class="panel-header compact">
+                    <div>
+                        <h3>Update Parking Location</h3>
+                        <p>
+                            Select your route number and choose your current parking
+                            spot inside the campus.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="driverParkingForm" class="driver-form">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="driverRouteSelect">Your Route No *</label>
+                            <select id="driverRouteSelect" required>
+                                <!-- Populated by JS from routes -->
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="driverLocationSelect">Current Parking Location *</label>
+                            <select id="driverLocationSelect" required>
+                                <option value="">Select a location…</option>
+                                <option value="In front of green building">1. In front of green building</option>
+                                <option value="In front of A block entrance">2. In front of A block entrance</option>
+                                <option value="Near to main entrance">3. Near to main entrance</option>
+                                <option value="In front of placement banner">4. In front of placement banner</option>
+                                <option value="In front of C block">5. In front of C block</option>
+                                <option value="In front of hut">6. In front of hut</option>
+                                <option value="Near to the ground">7. Near to the ground</option>
+                                <option value="Near to the astronaut statue">8. Near to the astronaut statue</option>
+                                <option value="In front of B block North">9. In front of B block North</option>
+                                <option value="In front of B block South">10. In front of B block South</option>
+                                <option value="Other">11. Custom (enter your own)</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="driverAvailabilitySelect">Availability *</label>
+                            <select id="driverAvailabilitySelect" required>
+                                <option value="Available">Available</option>
+                                <option value="Not Available">Not Available</option>
+                                <option value="Departed">Departed</option>
+                            </select>
+                        </div>
+                        <div class="form-field hidden" id="driverCustomLocationField">
+                            <label for="driverCustomLocation">Custom Location</label>
+                            <input type="text" id="driverCustomLocation"
+                                placeholder="Example: Near canteen gate / workshop corner…" />
+                        </div>
+                        <div class="form-field">
+                            <label for="driverNote">Extra Note (Optional)</label>
+                            <textarea id="driverNote" rows="2"
+                                placeholder="Example: Facing main gate, second row from the fence…"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="driver-form-actions">
+                        <button type="button" class="btn-ghost" id="driverClearBtn">
+                            <i class="fas fa-rotate-left"></i> Clear
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-location-arrow"></i>
+                            Publish Parking Location
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Right: Live summary / cards -->
+            <section class="panel driver-summary-panel">
+                <div class="panel-header compact">
+                    <div>
+                        <h3>Live Parking Board</h3>
+                        <p>Students see these locations in their table instantly.</p>
+                    </div>
+                </div>
+
+                <div id="driverParkingCards" class="driver-parking-grid">
+                    <!-- Filled by JS -->
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- ================= ADMIN LOGIN MODAL ================= -->
+    <div id="adminLoginModal" class="modal hidden">
+        <div class="modal-dialog">
+            <button class="modal-close" id="adminLoginCloseBtn">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="modal-icon">
+                <div class="modal-icon-circle">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+            </div>
+            <h2>Admin Login</h2>
+            <p class="modal-subtitle">
+                Only authorized staff may update the official bus schedule.
+            </p>
+
+            <form id="adminLoginForm" class="modal-form">
+                <div class="form-field">
+                    <label for="adminEmail">Email</label>
+                    <input type="email" id="adminEmail" placeholder="admin@ritians.edu" required />
+                </div>
+                <div class="form-field">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" placeholder="RIT@Admin2025" required />
+                </div>
+                <button type="submit" class="btn-primary btn-full">Sign In</button>
+                <div class="auth-switch-wrapper">
+                    <p>New here? <a href="#" id="adminRegisterLink">Create an account</a></p>
+                </div>
+                <button type="button" class="btn-logout btn-full" style="margin-top: 12px;"
+                    onclick="switchView('Student')">
+                    <i class="fas fa-arrow-left"></i> Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= DRIVER LOGIN MODAL ================= -->
+    <div id="driverLoginModal" class="modal hidden">
+        <div class="modal-dialog">
+            <button class="modal-close" id="driverLoginCloseBtn">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="modal-icon">
+                <div class="modal-icon-circle driver">
+                    <i class="fas fa-id-badge"></i>
+                </div>
+            </div>
+            <h2>Driver Login</h2>
+            <p class="modal-subtitle">
+                Dedicated portal for drivers to mark their parking location after entering the campus.
+            </p>
+
+            <form id="driverLoginForm" class="modal-form">
+                <div class="form-field">
+                    <label for="driverEmail">Email</label>
+                    <input type="email" id="driverEmail" placeholder="driver@ritians.edu" required />
+                </div>
+                <div class="form-field">
+                    <label for="driverPassword">Password</label>
+                    <input type="password" id="driverPassword" placeholder="RIT@Driver2025" required />
+                </div>
+                <button type="submit" class="btn-primary btn-full">Sign In</button>
+                <div class="auth-switch-wrapper">
+                    <p>New here? <a href="#" id="driverRegisterLink">Create an account</a></p>
+                </div>
+                <button type="button" class="btn-logout btn-full" style="margin-top: 12px;"
+                    onclick="switchView('Student')">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= REGISTER MODAL ================= -->
+    <div id="registerModal" class="modal hidden">
+        <div class="modal-dialog">
+            <button class="modal-close" id="registerCloseBtn">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="modal-icon">
+                <div class="modal-icon-circle accent">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+            </div>
+            <h2 id="registerTitle">Create Account</h2>
+            <p class="modal-subtitle">
+                Sign up to access the <span id="registerRoleName">portal</span>. Email verification required.
+            </p>
+
+            <form id="registerForm" class="modal-form">
+                <input type="hidden" id="registerRole" value="" />
+                <div class="form-field">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="John Doe" required />
+                </div>
+                <div class="form-field">
+                    <label for="registerEmail">Email (Gmail recommended)</label>
+                    <input type="email" id="registerEmail" placeholder="you@gmail.com" required />
+                </div>
+                <div class="form-field">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create a strong password" minlength="6"
+                        required />
+                </div>
+
+                <!-- Driver Specific Fields -->
+                <div id="driverRegisterFields" class="hidden">
+                    <div class="form-field">
+                        <label for="registerDriverId">Driver ID (Optional)</label>
+                        <input type="text" id="registerDriverId" placeholder="D-123" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full">Sign Up & Verify</button>
+                <div class="auth-switch-wrapper">
+                    <p>Already have an account? <a href="#" id="backToLoginLink">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= ROUTE STOPS MODAL ================= -->
+    <div id="stopsModal" class="modal hidden">
+        <div class="modal-dialog stops-modal">
+            <button class="modal-close" id="stopsCloseBtn">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="modal-icon">
+                <div class="modal-icon-circle">
+                    <i class="fas fa-route"></i>
+                </div>
+            </div>
+            <h2 id="stopsModalTitle">Route stoppings</h2>
+            <div id="stopsModalBody" class="stops-modal-body">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ABOUT & REPORT SECTION ================= -->
+    <section class="panel panel-main about-section">
+        <div class="about-layout">
+            <div class="about-info">
+                <h3>About Ritians Transport</h3>
+                <p>
+                    <strong>Rajalakshmi Institute of Technology</strong><br />
+                    Bangalore Highway Road, Kuthambakkam, Chennai, Tamil Nadu – 600124<br />
+                    For any queries, call <strong>91446718 1600</strong>
+                </p>
+            </div>
+            <div class="about-report">
+                <h3>Report / Feedback</h3>
+                <p class="about-report-subtitle">
+                    Help us improve your transport experience. Choose whether you are sending a complaint or feedback.
+                </p>
+                <form id="reportForm" class="report-form">
+                    <div class="report-type-group">
+                        <label class="report-type-option">
+                            <input type="radio" name="reportType" value="complaint" checked />
+                            <span>Complaint</span>
+                        </label>
+                        <label class="report-type-option">
+                            <input type="radio" name="reportType" value="feedback" />
+                            <span>Feedback</span>
+                        </label>
+                    </div>
+
+                    <div class="report-tags">
+                        <span class="report-tags-label">Quick options</span>
+                        <label class="report-tag">
+                            <input type="checkbox" name="tags" value="good-driving" />
+                            <span>Good driving</span>
+                        </label>
+                        <label class="report-tag">
+                            <input type="checkbox" name="tags" value="comfortable-journey" />
+                            <span>Comfortable journey</span>
+                        </label>
+                        <label class="report-tag">
+                            <input type="checkbox" name="tags" value="on-time-arrival" />
+                            <span>On-time arrival</span>
+                        </label>
+                        <label class="report-tag">
+                            <input type="checkbox" name="tags" value="cleanliness" />
+                            <span>Clean &amp; tidy bus</span>
+                        </label>
+                        <label class="report-tag">
+                            <input type="checkbox" name="tags" value="need-more-buses" />
+                            <span>Need more buses / trips</span>
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="reportMessage">Additional comments (optional)</label>
+                        <textarea id="reportMessage" rows="2"
+                            placeholder="Share any specific feedback or complaint here…"></textarea>
+                    </div>
+
+                    <div class="report-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

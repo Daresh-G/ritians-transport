@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Routes and stops are public for reading, but restricted for writing
+    match /routes/{route} {
+      allow read: if true;
+      allow write: if false; // Only via Backend (Admin SDK)
+    }
+    match /route_stops/{stop} {
+      allow read: if true;
+      allow write: if false; // Only via Backend (Admin SDK)
+    }
+
+    // Authority collection - User requested access
+    match /authority/{user} {
+      allow read: if true; 
+      allow write: if false; // Still protected for writes (Backend only)
+    }
+
+
+    // Default deny for everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

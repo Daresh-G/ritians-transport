@@ -1,0 +1,4 @@
+JWT_SECRET=super-secret-key-change-me-in-production
+ADMIN_EMAIL=daresh928@gmail.com
+PORT=3000
+MASTER_KEY=ritians-setup-key-2025

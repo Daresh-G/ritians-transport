@@ -1,0 +1,59 @@
+[2026-02-19T02:22:29.050Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[2026-02-19T02:22:29.052Z] > authorizing via signed-in user (daresh1911g@gmail.com)
+[2026-02-19T02:22:29.053Z] [iam] checking project ritians-transport for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[2026-02-19T02:22:29.057Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:29.058Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:29.060Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport:testIamPermissions [none]
+[2026-02-19T02:22:29.060Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport:testIamPermissions  x-goog-user-project=ritians-transport
+[2026-02-19T02:22:29.060Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[2026-02-19T02:22:34.869Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport:testIamPermissions 200
+[2026-02-19T02:22:34.870Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[2026-02-19T02:22:34.871Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:34.871Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:34.871Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/ritians-transport/serviceAccounts/ritians-transport@appspot.gserviceaccount.com:testIamPermissions [none]
+[2026-02-19T02:22:34.872Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/ritians-transport/serviceAccounts/ritians-transport@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[2026-02-19T02:22:39.032Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/ritians-transport/serviceAccounts/ritians-transport@appspot.gserviceaccount.com:testIamPermissions 200
+[2026-02-19T02:22:39.034Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/ritians-transport/serviceAccounts/ritians-transport@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+
+=== Deploying to 'ritians-transport'...
+
+i  deploying functions 
+[2026-02-19T02:22:39.045Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:39.046Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:39.046Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport [none]
+[2026-02-19T02:22:39.593Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport 200
+[2026-02-19T02:22:39.594Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/ritians-transport {"projectNumber":"1021044694281","projectId":"ritians-transport","lifecycleState":"ACTIVE","name":"RITIANS-TRANSPORT","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-02-17T02:16:11.957817Z"}
+i  functions: preparing codebase default for deployment 
+i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[2026-02-19T02:22:39.600Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:39.601Z] Checked if tokens are valid: true, expires at: 1771471271030
+i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[2026-02-19T02:22:39.602Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:39.602Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:39.602Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com [none]
+[2026-02-19T02:22:39.603Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com  x-goog-user-project=ritians-transport
+[2026-02-19T02:22:39.607Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com [none]
+[2026-02-19T02:22:39.608Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com  x-goog-user-project=ritians-transport
+[2026-02-19T02:22:42.440Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com 200
+[2026-02-19T02:22:42.441Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com [omitted]
+!  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[2026-02-19T02:22:42.442Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:42.442Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:42.443Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com:enable [none]
+[2026-02-19T02:22:42.443Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com:enable  x-goog-user-project=ritians-transport
+[2026-02-19T02:22:42.452Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com 200
+[2026-02-19T02:22:42.452Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com [omitted]
+!  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[2026-02-19T02:22:42.453Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:42.453Z] Checked if tokens are valid: true, expires at: 1771471271030
+[2026-02-19T02:22:42.454Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com:enable [none]
+[2026-02-19T02:22:42.454Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com:enable  x-goog-user-project=ritians-transport
+[2026-02-19T02:22:44.322Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com:enable 400
+[2026-02-19T02:22:44.323Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/cloudbuild.googleapis.com:enable [omitted]
+[2026-02-19T02:22:44.342Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com:enable 400
+[2026-02-19T02:22:44.342Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/ritians-transport/services/artifactregistry.googleapis.com:enable [omitted]
+
+Error: Your project ritians-transport must be on the Blaze (pay-as-you-go) plan to complete this command. Required API cloudbuild.googleapis.com can't be enabled until the upgrade is complete. To upgrade, visit the following URL:
+
+https://console.firebase.google.com/project/ritians-transport/usage/details

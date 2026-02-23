@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "locations": {
+            ".read": true,
+            ".write": false
+        },
+        ".read": false,
+        ".write": false
+    }
+}
