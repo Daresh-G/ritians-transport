@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:vite\"",
+    "dev:vite": "vite --port 3000 --strictPort",
+    "dev:server": "node server.js",
     "start": "node server.js",
-    "dev:all": "concurrently \"node server.js\" \"vite\"",
     "serve": "npm run build && node server.js",
     "build": "vite build",
     "postinstall": "npm run build",
     "preview": "vite preview",
-    "deploy-all": "npm run build && firebase deploy --only \"hosting,functions,firestore,database\""
+    "deploy-all": "npm run build && firebase deploy --only \"hosting,firestore,database\""
   },
   "engines": {
     "node": ">=18.0.0"

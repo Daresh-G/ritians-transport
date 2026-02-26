@@ -3,7 +3,7 @@ services:
     name: ritians-transport-api
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: node server.js
     envVars:
       - key: PORT

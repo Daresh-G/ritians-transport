@@ -1,7 +1,10 @@
 
 import fetch from 'node-fetch';
 
-const BASE = 'http://localhost:3000/api';
+import dotenv from 'dotenv';
+dotenv.config();
+const port = process.env.PORT || 3001;
+const BASE = `http://localhost:${port}/api`;
 
 async function testAll() {
     const creds = [

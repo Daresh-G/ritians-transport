@@ -464,10 +464,32 @@ function setupUIListeners() {
         document.getElementById("adminFormTitle").innerText = "Add New Route";
     });
 
-    document.getElementById("reportForm")?.addEventListener("submit", (e) => {
+    document.getElementById("reportForm")?.addEventListener("submit", async (e) => {
         e.preventDefault();
-        showToast("Thank you for your feedback!", "success");
-        e.target.reset();
+        const formData = new FormData(e.target);
+
+        const type = formData.get('reportType');
+        const tags = Array.from(formData.getAll('tags'));
+        const message = document.getElementById("reportMessage").value;
+
+        try {
+            const response = await fetch(`${API_BASE}/feedback`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type, tags, message })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                showToast("Thank you for your feedback!", "success");
+                e.target.reset();
+            } else {
+                showToast(data.error || "Submission failed", "error");
+            }
+        } catch (err) {
+            console.error("Feedback error:", err);
+            showToast("Cannot reach server", "error");
+        }
     });
 
     document.getElementById("backToStudentFromAdmin")?.addEventListener("click", () => switchView("Student"));

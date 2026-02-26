@@ -12,32 +12,24 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
+console.log("DEBUG: dotnev config done");
 
 const require = createRequire(import.meta.url);
-let serviceAccount;
+const serviceAccount = require('./service-account.json');
 
-if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-} else {
-    try {
-        serviceAccount = require('./service-account.json');
-    } catch (e) {
-        console.warn("⚠️ service-account.json not found. Set FIREBASE_SERVICE_ACCOUNT env var for production.");
-    }
-}
-
-if (serviceAccount) {
-    initializeApp({
-        credential: cert(serviceAccount),
-        databaseURL: "https://ritians-transport-default-rtdb.asia-southeast1.firebasedatabase.app/"
-    });
-}
+console.log("DEBUG: Initializing Firebase...");
+initializeApp({
+    credential: cert(serviceAccount),
+    databaseURL: "https://ritians-transport-default-rtdb.asia-southeast1.firebasedatabase.app/"
+});
+console.log("DEBUG: Firebase initialized");
 
 const db = getFirestore();
 const rtdb = getDatabase();
 const app = express();
 const port = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret';
+console.log("DEBUG: App created, port:", port);
 
 app.use(cors({
     origin: [
@@ -1223,18 +1215,10 @@ setInterval(checkAndResetDaily, 30 * 1000);
 
 
 app.get(/.*/, (req, res) => {
-    const indexPath = path.join(process.cwd(), 'dist', 'index.html');
-    res.sendFile(indexPath, (err) => {
-        if (err) {
-            res.status(404).send("Frontend not built. Run 'npm run build' first.");
-        }
-    });
+    res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
 });
 
 app.listen(port, () => {
     console.log(`🚀 Backend API running at http://localhost:${port}`);
-    console.log(`🚀 Serving frontend from /dist`);
-    if (process.env.NODE_ENV !== 'production') {
-        console.log(`🚀 For development with HMR, use http://localhost:3000`);
-    }
+    console.log(`🚀 Unified App accessible at http://localhost:3000 (via Vite)`);
 });
