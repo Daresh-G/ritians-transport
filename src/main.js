@@ -29,7 +29,9 @@ window.parkingData = {};
 window.isAdminLoggedIn = false;
 window.isDriverLoggedIn = false;
 window.currentSearchTerm = "";
-const API_BASE = "/api";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "/api"
+    : "https://your-render-app-name.onrender.com/api"; // Replace this with your actual Render URL later
 
 // Auth Helpers
 function getAuthToken() {
